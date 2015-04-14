@@ -28,12 +28,10 @@
    </select>
 </p>
 
-<p>Background
-<select id="bg_select">
-<option value="Black">Black</option>
-<option value="White">Whiter</option>
-<option value="Black_Ticks">Black Ticks</option>
-<option value="White_Ticks">White Ticks</option>
+<p>Clock Ticks
+<select id="ticks_select">
+<option value="offs">Off</option>
+<option value="on">On</option>
    </select>
 </p>
 
@@ -64,12 +62,12 @@
       function saveOptions() {
         var pokemon = document.getElementById("pokemon_select");
         var scale = document.getElementById("scale_select");
-        var background = document.getElementById("bg_select");
+        var ticks = document.getElementById("ticks_select");
         
         var options = {
           "pokemon": pokemon.options[pokemon.selectedIndex].value,
           "scale": scale.options[scale.selectedIndex].value,
-          "background": background.options[background.selectedIndex].value
+          "ticks": ticks.options[ticks.selectedIndex].value
         }
         
         return options;
