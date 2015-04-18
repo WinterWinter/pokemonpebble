@@ -1,0 +1,112 @@
+{
+    "appKeys": {
+        "KEY_POKEMON": 4,
+        "KEY_SCALE": 2,
+        "KEY_TEMPERATURE": 1,
+        "KEY_TICKS": 5
+    },
+    "capabilities": [
+        "location",
+        "configurable"
+    ],
+    "companyName": "Winters Watches",
+    "longName": "Pokemon Pebble",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/Charmander_Who.png",
+                "name": "C",
+                "type": "png"
+            },
+            {
+                "file": "images/Bulbasaur_Who.png",
+                "name": "B",
+                "type": "png"
+            },
+            {
+                "file": "images/Squirtle.png",
+                "name": "SQUIRTLE",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Pikachu.png",
+                "name": "PIKACHU",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Charmander.png",
+                "name": "CHARMANDER",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Bulbasaur.png",
+                "name": "BULBASAUR",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Pokeball_Battery_25.png",
+                "name": "BATTERY_25",
+                "type": "png"
+            },
+            {
+                "file": "images/Pokeball_Battery_50.png",
+                "name": "BATTERY_50",
+                "type": "png"
+            },
+            {
+                "file": "images/Pokeball_Battery_75.png",
+                "name": "BATTERY_75",
+                "type": "png"
+            },
+            {
+                "file": "images/Pokeball_Battery_100.png",
+                "name": "BATTERY_100",
+                "type": "png"
+            },
+            {
+                "file": "images/Background_Ticks.png",
+                "name": "BACKGROUND_TICKS",
+                "type": "png"
+            },
+            {
+                "file": "images/Background.png",
+                "name": "BACKGROUND",
+                "type": "png"
+            },
+            {
+                "file": "images/Menu.png",
+                "menuIcon": true,
+                "name": "MENU",
+                "type": "png"
+            },
+            {
+                "file": "fonts/OldSansBlack.ttf",
+                "name": "Weather_20",
+                "type": "font"
+            },
+            {
+                "file": "images/Minute.png",
+                "name": "IMAGE_HAND_MINUTE",
+                "type": "png"
+            },
+            {
+                "file": "images/Hour.png",
+                "name": "IMAGE_HAND_HOUR",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Pokemon Pebble",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "79187ba0-a920-4346-8c21-3760551a41a5",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
