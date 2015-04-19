@@ -151,7 +151,7 @@ static void update_display(struct tm *current_time) {
    	if( ((current_time->tm_min == 0) && (current_time->tm_sec == 0)) || (initiate_watchface == true) ){ 
     int r = rand() % 4;
     APP_LOG(APP_LOG_LEVEL_DEBUG, "random number generated [#%d].", r);
-    set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint (0,0));   
+    set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint (21, 33));   
     } 
 }
 
@@ -483,6 +483,12 @@ static void deinit(void) {
   text_layer_destroy(text_date_layer);
   fonts_unload_custom_font(date_font);
   
+  //Weather
+  text_layer_destroy(s_weather_layer);
+  fonts_unload_custom_font(s_weather_font);
+  
+  //Battery Layer
+  layer_destroy(battery_layer);
 	layer_destroy(layer);
   
   //Window
