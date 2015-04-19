@@ -15,21 +15,6 @@
     "resources": {
         "media": [
             {
-                "file": "images/Charmander_Who.png",
-                "name": "C",
-                "type": "png"
-            },
-            {
-                "file": "images/Bulbasaur_Who.png",
-                "name": "B",
-                "type": "png"
-            },
-            {
-                "file": "images/Squirtle.png",
-                "name": "SQUIRTLE",
-                "type": "png-trans"
-            },
-            {
                 "file": "images/Pikachu.png",
                 "name": "PIKACHU",
                 "type": "png-trans"
@@ -40,9 +25,24 @@
                 "type": "png-trans"
             },
             {
+                "file": "images/Squirtle.png",
+                "name": "SQUIRTLE",
+                "type": "png-trans"
+            },
+            {
                 "file": "images/Bulbasaur.png",
                 "name": "BULBASAUR",
                 "type": "png-trans"
+            },
+            {
+                "file": "images/Ticks.png",
+                "name": "BACKGROUND_TICKS",
+                "type": "png"
+            },
+            {
+                "file": "images/Background.png",
+                "name": "BACKGROUND",
+                "type": "png"
             },
             {
                 "file": "images/Pokeball_Battery_25.png",
@@ -62,16 +62,6 @@
             {
                 "file": "images/Pokeball_Battery_100.png",
                 "name": "BATTERY_100",
-                "type": "png"
-            },
-            {
-                "file": "images/Background_Ticks.png",
-                "name": "BACKGROUND_TICKS",
-                "type": "png"
-            },
-            {
-                "file": "images/Background.png",
-                "name": "BACKGROUND",
                 "type": "png"
             },
             {

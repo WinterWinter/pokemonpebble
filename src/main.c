@@ -230,12 +230,12 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
       
       if(strcmp(t->value->cstring, "off") == 0)
       {
-        set_container_image(&background_images[0], background_layers[0], BACKGROUND_IMAGE_RESOURCE_IDS[0], GPoint(0, 0));
+        set_container_image(&background_images[0], background_layers[0], BACKGROUND_IMAGE_RESOURCE_IDS[0], GPoint(4, 17));
         persist_write_int(KEY_TICKS, 0);
       }
        else if(strcmp(t->value->cstring, "on") == 0)
       {
-        set_container_image(&background_images[0], background_layers[0], BACKGROUND_IMAGE_RESOURCE_IDS[1], GPoint(0, 0)); 
+        set_container_image(&background_images[0], background_layers[0], BACKGROUND_IMAGE_RESOURCE_IDS[1], GPoint(4, 17)); 
         persist_write_int(KEY_TICKS, 1);
       }
       break;
@@ -244,27 +244,27 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
      
       if(strcmp(t->value->cstring, "Bulbasaur") == 0)
       {
-        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[0], GPoint(0,0));
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[0], GPoint(21,33));
         persist_write_int(KEY_POKEMON, 0);
       }
        else if(strcmp(t->value->cstring, "Charmander") == 0)
       {     
-        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[1], GPoint(0,0)); 
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[1], GPoint(21,33)); 
         persist_write_int(KEY_POKEMON, 1);
       }
        else if(strcmp(t->value->cstring, "Squirtle") == 0)
       {     
-        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[2], GPoint(0,0)); 
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[2], GPoint(21,33)); 
         persist_write_int(KEY_POKEMON, 2);
       }
        else if(strcmp(t->value->cstring, "Pikachu") == 0)
       {
-        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[3], GPoint(0,0)); 
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[3], GPoint(21,33)); 
         persist_write_int(KEY_POKEMON, 3);
       }   
         if(strcmp(t->value->cstring, "Random") == 0)
       {
-        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint(0,0));
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint(21,33));
         persist_write_int(KEY_POKEMON, 4);
       }
       break;
@@ -334,6 +334,7 @@ static void init(void) {
 	time_t t = time(NULL);
 
 	s_main_window = window_create();
+  window_set_background_color(s_main_window, GColorBlack);
 	window_stack_push(s_main_window, true);
 	rootLayer = window_get_root_layer(s_main_window);
   
@@ -350,10 +351,10 @@ static void init(void) {
   int ticks = persist_read_int(KEY_TICKS);
   
   if (ticks == 0){
-      set_container_image(&background_images[0], background_layers[0], BACKGROUND_IMAGE_RESOURCE_IDS[0], GPoint(0, 0)); 
+      set_container_image(&background_images[0], background_layers[0], BACKGROUND_IMAGE_RESOURCE_IDS[0], GPoint(4, 17)); 
   }
   else if (ticks == 1){
-      set_container_image(&background_images[0], background_layers[0], BACKGROUND_IMAGE_RESOURCE_IDS[1], GPoint(0, 0)); 
+      set_container_image(&background_images[0], background_layers[0], BACKGROUND_IMAGE_RESOURCE_IDS[1], GPoint(4, 17)); 
   }
   
   //Create Date Layer
@@ -394,21 +395,21 @@ static void init(void) {
   
   //Set Pokemon image based off settings
   if (pokemon == 0){
-         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[0], GPoint(0,0)); 
+         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[0], GPoint(21,33)); 
   } 
   else if(pokemon == 1){
-         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[1], GPoint(0,0));
+         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[1], GPoint(21,33));
   }
   else if(pokemon == 2){
-         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[2], GPoint(0,0));
+         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[2], GPoint(21,33));
   }
   else if(pokemon == 3){
-         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[3], GPoint (0,0));
+         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[3], GPoint (21,33));
   }
   else if(pokemon == 4){
      int r = rand() % 4;
     APP_LOG(APP_LOG_LEVEL_DEBUG, "random number generated [#%d].", r);
-    set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint (0,0));
+    set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint (21,33));
   }
   
 
