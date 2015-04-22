@@ -15,6 +15,8 @@ time_t auto_hide;
   
 static bool initiate_watchface = true;
 
+int POKEMON_COUNT = 11; 
+
 //Hand Layers
 static GBitmap *minuteHandBitmap, *hourHandBitmap;
 static RotBitmapLayer *minuteHandLayer, *hourHandLayer;
@@ -57,9 +59,17 @@ const int POKEBALL_IMAGE_RESOURCE_IDS[] = {
 const int POKEMON_IMAGE_RESOURCE_IDS[] = {
   RESOURCE_ID_BULBASAUR_WHITE,
   RESOURCE_ID_CHARMANDER_WHITE,
-  RESOURCE_ID_SQUIRTLE_WHITE,
+  RESOURCE_ID_EEVEE_WHITE,
+  RESOURCE_ID_GYARDOS_WHITE,
+  RESOURCE_ID_JIGGLYPUFF_WHITE,
+  RESOURCE_ID_MEW_WHITE,
   RESOURCE_ID_PIKACHU_WHITE,
+  RESOURCE_ID_PORYGON_WHITE,
+  RESOURCE_ID_PSYDUCK_WHITE,
+  RESOURCE_ID_SNORLAX_WHITE,
+  RESOURCE_ID_SQUIRTLE_WHITE,
 };
+
 
 //Background Container
 const int BACKGROUND_IMAGE_RESOURCE_IDS[] = {
@@ -146,13 +156,22 @@ vibes_enqueue_custom_pattern( (VibePattern) {
 } );
 }}}
 
-static void update_display(struct tm *current_time) {
+static void Random(struct tm *current_time) {
   
    	if( ((current_time->tm_min == 0) && (current_time->tm_sec == 0)) || (initiate_watchface == true) ){ 
-    int r = rand() % 4;
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "random number generated [#%d].", r);
+    int r = rand() % POKEMON_COUNT;
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Random Pokemon generated [#%d].", r);
     set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint (21, 33));   
     } 
+}
+
+
+static void Who() {
+  
+    srand(time(NULL));
+    int r = rand() % POKEMON_COUNT;
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Random Pokemon generated [#%d].", r);
+    set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint (21, 33));  
 }
 
 
@@ -160,8 +179,8 @@ static void handleTick(struct tm *t, TimeUnits units_changed) {
     
   int check = persist_read_int(KEY_POKEMON);
     
-    if (check == 4){
-    update_display(t);
+    if (check == 12){
+    Random(t);
   }
   
 	GRect r;
@@ -178,7 +197,7 @@ static void handleTick(struct tm *t, TimeUnits units_changed) {
 	r.origin.x = 72 - r.size.w/2 + 65 * cos_lookup((minuteAngle + 3 * TRIG_MAX_ANGLE / 4)%TRIG_MAX_ANGLE) / TRIG_MAX_RATIO;
 	r.origin.y = 84 - r.size.h/2 + 65 * sin_lookup((minuteAngle + 3 * TRIG_MAX_ANGLE / 4)%TRIG_MAX_ANGLE) / TRIG_MAX_RATIO;
 	layer_set_frame((Layer *)minuteHandLayer, r);
-	rot_bitmap_layer_set_angle(minuteHandLayer, minuteAngle);
+	rot_bitmap_layer_set_angle(minuteHandLayer, minuteAngle); 
   
   if(time(NULL) > auto_hide){
     layer_set_hidden(text_layer_get_layer(s_weather_layer), true);
@@ -188,12 +207,15 @@ static void handleTick(struct tm *t, TimeUnits units_changed) {
     for (int i = 0; i < TOTAL_POKEBALL; ++i) {
   layer_set_hidden(bitmap_layer_get_layer(pokeball_layers[i]), true);
     }
-  }   
+  }
+  
+  if(time(NULL) == auto_hide + 1 && check == 12){
+    Who();  
+  }  
 }
 
-
 static void handle_tap(AccelAxisType axis, int32_t direction)
-{
+{  
   auto_hide = time(NULL) + 10;
   layer_set_hidden(text_layer_get_layer(s_weather_layer), false);
   layer_set_hidden(text_layer_get_layer(text_date_layer), false);
@@ -201,7 +223,7 @@ static void handle_tap(AccelAxisType axis, int32_t direction)
   
   for (int i = 0; i < TOTAL_POKEBALL; ++i) {
   layer_set_hidden(bitmap_layer_get_layer(pokeball_layers[i]), false);
-  }
+      }  
 }
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
@@ -217,9 +239,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   int finalTemp = Kelvin;
   int temp = persist_read_int(KEY_TEMP);
   
-  int r = rand() % 4;
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "random number generated [#%d].", r);
-
+  int r = rand() % POKEMON_COUNT;
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Random Pokemon generated [#%d].", r);
     
   // For all items
   while(t != NULL) {
@@ -252,20 +273,63 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[1], GPoint(21,33)); 
         persist_write_int(KEY_POKEMON, 1);
       }
-       else if(strcmp(t->value->cstring, "Squirtle") == 0)
+       else if(strcmp(t->value->cstring, "Eevee") == 0)
       {     
         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[2], GPoint(21,33)); 
         persist_write_int(KEY_POKEMON, 2);
       }
-       else if(strcmp(t->value->cstring, "Pikachu") == 0)
+       else if(strcmp(t->value->cstring, "Gyardos") == 0)
       {
         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[3], GPoint(21,33)); 
         persist_write_int(KEY_POKEMON, 3);
       }   
-        if(strcmp(t->value->cstring, "Random") == 0)
+            
+      else if(strcmp(t->value->cstring, "Jigglypuff") == 0)
+      {     
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[4], GPoint(21,33)); 
+        persist_write_int(KEY_POKEMON, 4);
+      }
+      
+      else if(strcmp(t->value->cstring, "Mew") == 0)
+      {     
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[5], GPoint(21,33)); 
+        persist_write_int(KEY_POKEMON, 5);
+      }
+      
+      else if(strcmp(t->value->cstring, "Pikachu") == 0)
+      {     
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[6], GPoint(21,33)); 
+        persist_write_int(KEY_POKEMON, 6);
+      }
+      
+      else if(strcmp(t->value->cstring, "Porygon") == 0)
+      {     
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[7], GPoint(21,33)); 
+        persist_write_int(KEY_POKEMON, 7);
+      }
+      
+      else if(strcmp(t->value->cstring, "Psyduck") == 0)
+      {     
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[8], GPoint(21,33)); 
+        persist_write_int(KEY_POKEMON, 8);
+      }
+      
+      else if(strcmp(t->value->cstring, "Snorlax") == 0)
+      {     
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[9], GPoint(21,33)); 
+        persist_write_int(KEY_POKEMON, 9);
+      }
+      
+      else if(strcmp(t->value->cstring, "Squirtle") == 0)
+      {     
+        set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[10], GPoint(21,33)); 
+        persist_write_int(KEY_POKEMON, 10);
+      }
+      
+        else if(strcmp(t->value->cstring, "Random") == 0)
       {
         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint(21,33));
-        persist_write_int(KEY_POKEMON, 4);
+        persist_write_int(KEY_POKEMON, 12);
       }
       break;
       
@@ -307,6 +371,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     t = dict_read_next(iterator);
   }
   
+
   // Assemble full string and display
   snprintf(weather_layer_buffer, sizeof(weather_layer_buffer), "%s", temperature_buffer);
   text_layer_set_text(s_weather_layer, weather_layer_buffer);
@@ -385,34 +450,25 @@ static void init(void) {
     for (int i = 0; i < TOTAL_POKEMON; ++i) {
    		pokemon_layers[i] = bitmap_layer_create(dummy_frame);
    		layer_add_child(rootLayer, bitmap_layer_get_layer(pokemon_layers[i]));
-      bitmap_layer_set_compositing_mode(pokemon_layers[0], GCompOpAnd);
+      bitmap_layer_set_compositing_mode(pokemon_layers[i], GCompOpAnd);
 	}
   
-
   //Read persistent setting for Pokemon choice
   int pokemon = persist_read_int(KEY_POKEMON);
     
   
   //Set Pokemon image based off settings
-  if (pokemon == 0){
-         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[0], GPoint(21,33)); 
-  } 
-  else if(pokemon == 1){
-         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[1], GPoint(21,33));
+  if (pokemon < POKEMON_COUNT){
+      set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[pokemon], GPoint(21,33)); 
   }
-  else if(pokemon == 2){
-         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[2], GPoint(21,33));
-  }
-  else if(pokemon == 3){
-         set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[3], GPoint (21,33));
-  }
-  else if(pokemon == 4){
-     int r = rand() % 4;
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "random number generated [#%d].", r);
+  else if(pokemon == 12){
+    uint8_t r = rand() % POKEMON_COUNT;
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Random Pokemon generated [#%d].", r);
     set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[r], GPoint (21,33));
   }
-  
-
+  else {
+      set_container_image(&pokemon_images[0], pokemon_layers[0], POKEMON_IMAGE_RESOURCE_IDS[0], GPoint(21,33)); 
+  }
   
   layer = layer_create(GRect(0, 0, 144, 168));
 	layer_add_child(rootLayer, layer);
@@ -511,7 +567,7 @@ static void deinit(void) {
    	layer_remove_from_parent(bitmap_layer_get_layer(pokemon_layers[i]));
    	gbitmap_destroy(pokemon_images[i]);
    	bitmap_layer_destroy(pokemon_layers[i]);
-}
+} 
   
 }
 
