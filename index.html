@@ -24,7 +24,14 @@
 <option value="Random">Random</option>
 <option value="Bulbasaur">Bulbasaur</option>
 <option value="Charmander">Charmander</option>
+<option value="Eevee">Eevee</option>
+<option value="Gyardos">Gyardos</option>
+<option value="Jigglypuff">Jigglypuff</option>
+<option value="Mew">Mew</option>
 <option value="Pikachu">Pikachu</option>
+<option value="Porygon">Porygon</option>
+<option value="Psyduck">Psyduck</option>
+<option value="Snorlax">Snorlax</option>
 <option value="Squirtle">Squirtle</option>
    </select>
 </p>
@@ -79,6 +86,7 @@
           console.log("Submit");
           var options = saveOptions();
           var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+          
           
           document.location = location;
         }, 
