@@ -21,6 +21,8 @@ int POKEMON_COUNT = 11;
 static GBitmap *minuteHandBitmap, *hourHandBitmap;
 static RotBitmapLayer *minuteHandLayer, *hourHandLayer;
 
+static TextLayer *s_time_layer;
+
 //Date Layer
 TextLayer *text_date_layer;
 static GFont *date_font;
@@ -100,16 +102,16 @@ GBitmap *old_image = *bmp_image;
 void battery_layer_update_callback(Layer *layer, GContext *ctx) {
 
   	if (battery_level > 75) {
-    set_container_image(&pokeball_images[0], pokeball_layers[0], POKEBALL_IMAGE_RESOURCE_IDS[3], GPoint(30, 81));
+    set_container_image(&pokeball_images[0], pokeball_layers[0], POKEBALL_IMAGE_RESOURCE_IDS[3], GPoint(17, 73));
       } 
       else if (battery_level > 50 && battery_level <= 75){
-    set_container_image(&pokeball_images[0], pokeball_layers[0], POKEBALL_IMAGE_RESOURCE_IDS[2], GPoint(30, 81));
+    set_container_image(&pokeball_images[0], pokeball_layers[0], POKEBALL_IMAGE_RESOURCE_IDS[2], GPoint(17, 73));
     }
       else if (battery_level > 25 && battery_level <= 50){
-    set_container_image(&pokeball_images[0], pokeball_layers[0], POKEBALL_IMAGE_RESOURCE_IDS[1], GPoint(30, 81));
+    set_container_image(&pokeball_images[0], pokeball_layers[0], POKEBALL_IMAGE_RESOURCE_IDS[1], GPoint(17, 73));
     }
       else if (battery_level <= 25){
-    set_container_image(&pokeball_images[0], pokeball_layers[0], POKEBALL_IMAGE_RESOURCE_IDS[0], GPoint(30, 81));
+    set_container_image(&pokeball_images[0], pokeball_layers[0], POKEBALL_IMAGE_RESOURCE_IDS[0], GPoint(17, 73));
     }
   	else {	
       
@@ -124,16 +126,28 @@ void battery_state_handler(BatteryChargeState charge) {
 }
 
 
-static void update_time() {
+static void update_time() {  
   // Get a tm structure
   time_t temp = time(NULL); 
   struct tm *tick_time = localtime(&temp);
-
-  // Create a long-lived buffer
+  
+  
+  // Create buffers
+  static char buffer[] = "00:00";
   static char date_text[] = "00.00";
 
-  // Only update the date when it's changed.
+  // Write the current hours and minutes into the buffer
+  if(clock_is_24h_style() == true) {
+    //Use 2h hour format
+    strftime(buffer, sizeof("00:00"), "%H:%M", tick_time);
+  } else {
+    //Use 12 hour format
+    strftime(buffer, sizeof("00:00"), "%I:%M", tick_time);
+  }
+
   strftime(date_text, sizeof(date_text), "%m.%d", tick_time);
+  
+  text_layer_set_text(s_time_layer, buffer);
   text_layer_set_text(text_date_layer, date_text);
   
 }
@@ -199,10 +213,27 @@ static void handleTick(struct tm *t, TimeUnits units_changed) {
 	layer_set_frame((Layer *)minuteHandLayer, r);
 	rot_bitmap_layer_set_angle(minuteHandLayer, minuteAngle); 
   
-  if(time(NULL) > auto_hide){
+  if(time(NULL) == auto_hide - 5){
+    
+      //Show
+  layer_set_hidden(text_layer_get_layer(s_weather_layer), false);
+  layer_set_hidden(text_layer_get_layer(text_date_layer), false);  
+  for (int i = 0; i < TOTAL_POKEBALL; ++i) {
+  layer_set_hidden(bitmap_layer_get_layer(pokeball_layers[i]), false);
+      } 
+    
+    //Hide
+  layer_set_hidden(text_layer_get_layer(s_time_layer), true);
+
+  }
+  
+  if(time(NULL) > auto_hide){    
+    //Show
+    layer_set_hidden(bitmap_layer_get_layer(pokemon_layers[0]), false); 
+    
+    //Hide
     layer_set_hidden(text_layer_get_layer(s_weather_layer), true);
     layer_set_hidden(text_layer_get_layer(text_date_layer), true);
-    layer_set_hidden(bitmap_layer_get_layer(pokemon_layers[0]), false); 
 
     for (int i = 0; i < TOTAL_POKEBALL; ++i) {
   layer_set_hidden(bitmap_layer_get_layer(pokeball_layers[i]), true);
@@ -216,14 +247,14 @@ static void handleTick(struct tm *t, TimeUnits units_changed) {
 
 static void handle_tap(AccelAxisType axis, int32_t direction)
 {  
-  auto_hide = time(NULL) + 10;
-  layer_set_hidden(text_layer_get_layer(s_weather_layer), false);
-  layer_set_hidden(text_layer_get_layer(text_date_layer), false);
-  layer_set_hidden(bitmap_layer_get_layer(pokemon_layers[0]), true);
+  auto_hide = time(NULL) + 8;
   
-  for (int i = 0; i < TOTAL_POKEBALL; ++i) {
-  layer_set_hidden(bitmap_layer_get_layer(pokeball_layers[i]), false);
-      }  
+  //Hide
+  layer_set_hidden(bitmap_layer_get_layer(pokemon_layers[0]), true);
+
+ //Show
+    layer_set_hidden(text_layer_get_layer(s_time_layer), false);
+  
 }
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
@@ -492,6 +523,17 @@ static void init(void) {
   text_layer_set_text_alignment(s_weather_layer, GTextAlignmentCenter);
   text_layer_set_text(s_weather_layer, "...");
   layer_set_hidden(text_layer_get_layer(s_weather_layer), true);
+  
+  // Create Digital Time TextLayer
+  s_time_layer = text_layer_create(GRect(0, 60, 144, 50));
+  text_layer_set_background_color(s_time_layer, GColorClear);
+  text_layer_set_text_color(s_time_layer, GColorBlack);
+  text_layer_set_text(s_time_layer, "00:00");  
+  text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+  text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
+  layer_add_child(rootLayer, text_layer_get_layer(s_time_layer));
+  layer_set_hidden(text_layer_get_layer(s_time_layer), true);
+
 
   //Create second custom font, apply it and add to Window
   s_weather_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_Weather_20));
@@ -538,6 +580,9 @@ static void deinit(void) {
   //Date
   text_layer_destroy(text_date_layer);
   fonts_unload_custom_font(date_font);
+  
+  //Time
+  text_layer_destroy(s_time_layer);
   
   //Weather
   text_layer_destroy(s_weather_layer);

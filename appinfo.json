@@ -15,94 +15,33 @@
     "resources": {
         "media": [
             {
-                "file": "images/Jigglypuff.png",
-                "name": "JIGGLYPUFF",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Mew.png",
-                "name": "MEW",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Psyduck.png",
-                "name": "PSYDUCK",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Snorlax.png",
-                "name": "SNORLAX",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Porygon.png",
-                "name": "PORYGON",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Gyardos.png",
-                "name": "GYARDOS",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Eevee.png",
-                "name": "EEVEE",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Pikachu.png",
-                "name": "PIKACHU",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Charmander.png",
-                "name": "CHARMANDER",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Squirtle.png",
-                "name": "SQUIRTLE",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Bulbasaur.png",
-                "name": "BULBASAUR",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Ticks.png",
-                "name": "BACKGROUND_TICKS",
-                "type": "png"
-            },
-            {
-                "file": "images/Background.png",
-                "name": "BACKGROUND",
-                "type": "png"
-            },
-            {
-                "file": "images/Pokeball_Battery_25.png",
+                "file": "images/Pokeballs25.png",
                 "name": "BATTERY_25",
                 "type": "png"
             },
             {
-                "file": "images/Pokeball_Battery_50.png",
+                "file": "images/Pokeballs50.png",
                 "name": "BATTERY_50",
                 "type": "png"
             },
             {
-                "file": "images/Pokeball_Battery_75.png",
+                "file": "images/Pokeballs75.png",
                 "name": "BATTERY_75",
                 "type": "png"
             },
             {
-                "file": "images/Pokeball_Battery_100.png",
+                "file": "images/Pokeballs100.png",
                 "name": "BATTERY_100",
                 "type": "png"
             },
             {
-                "file": "images/Menu.png",
-                "menuIcon": true,
-                "name": "MENU",
+                "file": "images/Hour.png",
+                "name": "IMAGE_HAND_HOUR",
+                "type": "png"
+            },
+            {
+                "file": "images/Minute.png",
+                "name": "IMAGE_HAND_MINUTE",
                 "type": "png"
             },
             {
@@ -111,14 +50,75 @@
                 "type": "font"
             },
             {
-                "file": "images/Minute.png",
-                "name": "IMAGE_HAND_MINUTE",
+                "file": "images/Menu.png",
+                "menuIcon": true,
+                "name": "MENU",
                 "type": "png"
             },
             {
-                "file": "images/Hour.png",
-                "name": "IMAGE_HAND_HOUR",
+                "file": "images/Background.png",
+                "name": "BACKGROUND",
                 "type": "png"
+            },
+            {
+                "file": "images/Ticks.png",
+                "name": "BACKGROUND_TICKS",
+                "type": "png"
+            },
+            {
+                "file": "images/Bulbasaur.png",
+                "name": "BULBASAUR",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Squirtle.png",
+                "name": "SQUIRTLE",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Charmander.png",
+                "name": "CHARMANDER",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Pikachu.png",
+                "name": "PIKACHU",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Eevee.png",
+                "name": "EEVEE",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Gyardos.png",
+                "name": "GYARDOS",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Porygon.png",
+                "name": "PORYGON",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Snorlax.png",
+                "name": "SNORLAX",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Psyduck.png",
+                "name": "PSYDUCK",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Mew.png",
+                "name": "MEW",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Jigglypuff.png",
+                "name": "JIGGLYPUFF",
+                "type": "png-trans"
             }
         ]
     },
