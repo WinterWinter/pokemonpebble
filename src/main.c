@@ -190,6 +190,8 @@ static void Who() {
 
 
 static void handleTick(struct tm *t, TimeUnits units_changed) {
+  
+  update_time();
     
   int check = persist_read_int(KEY_POKEMON);
     
