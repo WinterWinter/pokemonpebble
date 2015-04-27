@@ -22,17 +22,24 @@
 <p>Pokemon
 <select id="pokemon_select">
 <option value="Random">Random</option>
+<option value="Abra">Abra</option>
+<option value="Blastoise">Blastoise</option>
 <option value="Bulbasaur">Bulbasaur</option>
+<option value="Charizard">Charizard</option>
 <option value="Charmander">Charmander</option>
+<option value="Cubone">Cubone</option>
 <option value="Eevee">Eevee</option>
 <option value="Gyardos">Gyardos</option>
 <option value="Jigglypuff">Jigglypuff</option>
 <option value="Mew">Mew</option>
+<option value="Mewtwo">Mewtwo</option>
 <option value="Pikachu">Pikachu</option>
 <option value="Porygon">Porygon</option>
 <option value="Psyduck">Psyduck</option>
+<option value="Raichu">Raichu</option>
 <option value="Snorlax">Snorlax</option>
 <option value="Squirtle">Squirtle</option>
+<option value="Venasaur">Venasaur</option>
    </select>
 </p>
 
@@ -40,6 +47,13 @@
 <select id="ticks_select">
 <option value="off">Off</option>
 <option value="on">On</option>
+   </select>
+</p>
+
+<p>Hands
+<select id="hands_select">
+<option value="show">Show</option>
+<option value="hide">Hide</option>
    </select>
 </p>
 
@@ -60,6 +74,26 @@
    </p>
 
     <script>
+    
+      // Get the Query Parameter
+    function getQueryParam(variable, default_)
+    {
+        var query = location.search.substring(1);
+ 
+        var vars = query.split('&');
+ 
+        for (var i = 0; i < vars.length; i++)
+        {
+            var pair = vars[i].split('=');
+ 
+            if (pair[0] == variable)
+            {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+ 
+        return default_ || false;
+    }
 	
        //Cancel Button function
        $("#b-cancel").click(function() {
@@ -71,11 +105,13 @@
         var pokemon = document.getElementById("pokemon_select");
         var scale = document.getElementById("scale_select");
         var ticks = document.getElementById("ticks_select");
+        var hands = document.getElementById("hands_select");
         
         var options = {
           "pokemon": pokemon.options[pokemon.selectedIndex].value,
           "scale": scale.options[scale.selectedIndex].value,
-          "ticks": ticks.options[ticks.selectedIndex].value
+          "ticks": ticks.options[ticks.selectedIndex].value,
+          "hands": hands.options[hands.selectedIndex].value
         }
         
         return options;
@@ -85,7 +121,8 @@
         function() {
           console.log("Submit");
           var options = saveOptions();
-          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+           var return_to = getQueryParam('return_to', 'pebblejs://close#');
+           var location = return_to + encodeURIComponent(JSON.stringify(options));
           
           
           document.location = location;
