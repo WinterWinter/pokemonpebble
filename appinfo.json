@@ -1,5 +1,6 @@
 {
     "appKeys": {
+        "KEY_HANDS": 6,
         "KEY_POKEMON": 4,
         "KEY_SCALE": 2,
         "KEY_TEMPERATURE": 1,
@@ -15,53 +16,28 @@
     "resources": {
         "media": [
             {
-                "file": "images/Jigglypuff.png",
-                "name": "JIGGLYPUFF",
+                "file": "images/Mewtwo.png",
+                "name": "MEWTWO",
                 "type": "png-trans"
             },
             {
-                "file": "images/Mew.png",
-                "name": "MEW",
+                "file": "images/Raichu.png",
+                "name": "RAICHU",
                 "type": "png-trans"
             },
             {
-                "file": "images/Psyduck.png",
-                "name": "PSYDUCK",
+                "file": "images/Charizard.png",
+                "name": "CHARIZARD",
                 "type": "png-trans"
             },
             {
-                "file": "images/Snorlax.png",
-                "name": "SNORLAX",
+                "file": "images/Blastoise.png",
+                "name": "BLASTOISE",
                 "type": "png-trans"
             },
             {
-                "file": "images/Porygon.png",
-                "name": "PORYGON",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Gyardos.png",
-                "name": "GYARDOS",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Eevee.png",
-                "name": "EEVEE",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Pikachu.png",
-                "name": "PIKACHU",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Charmander.png",
-                "name": "CHARMANDER",
-                "type": "png-trans"
-            },
-            {
-                "file": "images/Squirtle.png",
-                "name": "SQUIRTLE",
+                "file": "images/Venasaur.png",
+                "name": "VENASAUR",
                 "type": "png-trans"
             },
             {
@@ -70,44 +46,18 @@
                 "type": "png-trans"
             },
             {
-                "file": "images/Ticks.png",
-                "name": "BACKGROUND_TICKS",
-                "type": "png"
+                "file": "images/Abra.png",
+                "name": "ABRA",
+                "type": "png-trans"
             },
             {
-                "file": "images/Background.png",
-                "name": "BACKGROUND",
-                "type": "png"
+                "file": "images/Cubone.png",
+                "name": "CUBONE",
+                "type": "png-trans"
             },
             {
-                "file": "images/Menu.png",
-                "menuIcon": true,
-                "name": "MENU",
-                "type": "png"
-            },
-            {
-                "file": "fonts/OldSansBlack.ttf",
-                "name": "Weather_20",
-                "type": "font"
-            },
-            {
-                "file": "images/Minute.png",
-                "name": "IMAGE_HAND_MINUTE",
-                "type": "png"
-            },
-            {
-                "file": "images/Hour.png",
-                "name": "IMAGE_HAND_HOUR",
-                "type": "png"
-            },
-            {
-                "file": "images/Pokeballs100.png",
-                "name": "BATTERY_100",
-                "type": "png"
-            },
-            {
-                "file": "images/Pokeballs75.png",
-                "name": "BATTERY_75",
+                "file": "images/Pokeballs25.png",
+                "name": "BATTERY_25",
                 "type": "png"
             },
             {
@@ -116,9 +66,95 @@
                 "type": "png"
             },
             {
-                "file": "images/Pokeballs25.png",
-                "name": "BATTERY_25",
+                "file": "images/Pokeballs75.png",
+                "name": "BATTERY_75",
                 "type": "png"
+            },
+            {
+                "file": "images/Pokeballs100.png",
+                "name": "BATTERY_100",
+                "type": "png"
+            },
+            {
+                "file": "images/Hour.png",
+                "name": "IMAGE_HAND_HOUR",
+                "type": "png"
+            },
+            {
+                "file": "images/Minute.png",
+                "name": "IMAGE_HAND_MINUTE",
+                "type": "png"
+            },
+            {
+                "file": "fonts/OldSansBlack.ttf",
+                "name": "Weather_20",
+                "type": "font"
+            },
+            {
+                "file": "images/Menu.png",
+                "menuIcon": true,
+                "name": "MENU",
+                "type": "png"
+            },
+            {
+                "file": "images/Background.png",
+                "name": "BACKGROUND",
+                "type": "png"
+            },
+            {
+                "file": "images/Ticks.png",
+                "name": "BACKGROUND_TICKS",
+                "type": "png"
+            },
+            {
+                "file": "images/Squirtle.png",
+                "name": "SQUIRTLE",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Charmander.png",
+                "name": "CHARMANDER",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Pikachu.png",
+                "name": "PIKACHU",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Eevee.png",
+                "name": "EEVEE",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Gyardos.png",
+                "name": "GYARDOS",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Porygon.png",
+                "name": "PORYGON",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Snorlax.png",
+                "name": "SNORLAX",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Psyduck.png",
+                "name": "PSYDUCK",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Mew.png",
+                "name": "MEW",
+                "type": "png-trans"
+            },
+            {
+                "file": "images/Jigglypuff.png",
+                "name": "JIGGLYPUFF",
+                "type": "png-trans"
             }
         ]
     },

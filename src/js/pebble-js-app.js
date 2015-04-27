@@ -9,21 +9,23 @@ Pebble.addEventListener("webviewclosed",
   function(e) {
     //Get JSON dictionary
     var tempScale = JSON.parse(decodeURIComponent(e.response));
-    console.log("Configuration window returned: " + JSON.stringify(tempScale));
+    //console.log("Configuration window returned: " + JSON.stringify(tempScale));
     
     var dictionary = {
       "KEY_POKEMON" : tempScale.pokemon,
       "KEY_TICKS" : tempScale.ticks,
-      "KEY_SCALE" : tempScale.scale,    
+      "KEY_SCALE" : tempScale.scale,
+      "KEY_HANDS" : tempScale.hands,    
+
        };
 
     //Send to Pebble, persist there
     Pebble.sendAppMessage(dictionary,
       function(e) {
-        console.log("Sending settings data...");
+        //console.log("Sending settings data...");
       },
       function(e) {
-        console.log("Settings feedback failed!");
+        //console.log("Settings feedback failed!");
       }
     );
   }
@@ -51,7 +53,7 @@ function locationSuccess(pos) {
 
       // Temperature in Kelvin requires adjustment
       var temperature = Math.round(json.main.temp);
-      console.log("Temperature is " + temperature);
+      //console.log("Temperature is " + temperature);
 
       
       // Assemble dictionary using our keys
@@ -62,10 +64,10 @@ function locationSuccess(pos) {
       // Send to Pebble
       Pebble.sendAppMessage(dictionary,
         function(e) {
-          console.log("Weather info sent to Pebble successfully!");
+          //console.log("Weather info sent to Pebble successfully!");
         },
         function(e) {
-          console.log("Error sending weather info to Pebble!");
+          //console.log("Error sending weather info to Pebble!");
         }
       );
     }      
@@ -73,7 +75,7 @@ function locationSuccess(pos) {
 }
 
 function locationError(err) {
-  console.log("Error requesting location!");
+  //console.log("Error requesting location!");
 }
 
 function getWeather() {
@@ -87,7 +89,7 @@ function getWeather() {
 // Listen for when the watchface is opened
 Pebble.addEventListener('ready', 
   function(e) {
-    console.log("PebbleKit JS ready!");
+    //console.log("PebbleKit JS ready!");
 
     // Get the initial weather
     getWeather();
@@ -97,7 +99,7 @@ Pebble.addEventListener('ready',
 // Listen for when an AppMessage is received
 Pebble.addEventListener('appmessage',
   function(e) {
-    console.log("AppMessage received!");
+    //console.log("AppMessage received!");
     getWeather();
   }                     
 );
