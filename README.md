@@ -1,5 +1,5 @@
 #Pokemon Pebble
 
-This project is open source, please give credit to WintersWatches if using code for your own watchfaces or watch applications.
+This project is open source, please give credit to Game Time if using code for your own watchfaces or watch applications.
 
 Enjoy.
