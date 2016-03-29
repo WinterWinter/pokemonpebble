@@ -1,133 +1,82 @@
 <!DOCTYPE html>
 <html>
   <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <title>Pokemon Pebble</title>
+ 
+    <title>Duck Hunt GT</title>
+    
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://winterwinter.github.com/DuckHunt/css/DuckHunt.css" />
+  <link rel="stylesheet" href="http://winterwinter.github.com/DuckHunt/css/jquery.mobile.icons.min.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" /> 
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+    
   </head>
   <body>
 
 <div data-role="page">
-  <div data-role="header"  data-theme="b">
-  <h1>Selection Screen</h1>
+  <div data-role="header"  data-theme="a">
+  <h1>Settings</h1>
   </div>
-
 
   <div data-role="main" class="ui-content">
     <form method="post" action="demoform.asp">
       <fieldset class="ui-field-contain">
 
-<p>Pokemon
-<select id="pokemon_select">
-<option value="Random">Random</option>
-<option value="Abra">Abra</option>
-<option value="Blastoise">Blastoise</option>
-<option value="Bulbasaur">Bulbasaur</option>
-<option value="Charizard">Charizard</option>
-<option value="Charmander">Charmander</option>
-<option value="Cubone">Cubone</option>
-<option value="Eevee">Eevee</option>
-<option value="Gyardos">Gyardos</option>
-<option value="Jigglypuff">Jigglypuff</option>
-<option value="Mew">Mew</option>
-<option value="Mewtwo">Mewtwo</option>
-<option value="Pikachu">Pikachu</option>
-<option value="Porygon">Porygon</option>
-<option value="Psyduck">Psyduck</option>
-<option value="Raichu">Raichu</option>
-<option value="Snorlax">Snorlax</option>
-<option value="Squirtle">Squirtle</option>
-<option value="Venasaur">Venasaur</option>
-   </select>
-</p>
-
-<p>Clock Ticks
-<select id="ticks_select">
-<option value="off">Off</option>
-<option value="on">On</option>
-   </select>
-</p>
-
-<p>Hands
-<select id="hands_select">
-<option value="show">Show</option>
-<option value="hide">Hide</option>
-   </select>
-</p>
-
 <p>Temperature Scale
-<select id="scale_select">
+<select id="scale">
 <option value="C">Celsius</option>
 <option value="F">Fahrenheit</option>
    </select>
 </p>
-    
 
 <br>
     <p>
 <fieldset class="ui-grid-a">
-<div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
-<div class="ui-block-b"><button type="submit" data-theme="b" id="save_button">Save</button></div>
+<div class="ui-block-a"><button type="submit" data-theme="b" id="b-cancel">Cancel</button></div>
+<div class="ui-block-b"><button type="submit" data-theme="c" id="save_button">Save</button></div>
 </fieldset>
    </p>
 
     <script>
-    
-      // Get the Query Parameter
-    function getQueryParam(variable, default_)
-    {
-        var query = location.search.substring(1);
- 
-        var vars = query.split('&');
- 
-        for (var i = 0; i < vars.length; i++)
-        {
-            var pair = vars[i].split('=');
- 
-            if (pair[0] == variable)
-            {
-                return decodeURIComponent(pair[1]);
-            }
-        }
- 
-        return default_ || false;
-    }
+  function getConfigData() {
+    var Scale = document.getElementById("scale");
 	
-       //Cancel Button function
-       $("#b-cancel").click(function() {
-            console.log("Cancel");
-            document.location = "pebblejs://close";
-        });
-      //Setup to allow easy adding more options later
-      function saveOptions() {
-        var pokemon = document.getElementById("pokemon_select");
-        var scale = document.getElementById("scale_select");
-        var ticks = document.getElementById("ticks_select");
-        var hands = document.getElementById("hands_select");
-        
-        var options = {
-          "pokemon": pokemon.options[pokemon.selectedIndex].value,
-          "scale": scale.options[scale.selectedIndex].value,
-          "ticks": ticks.options[ticks.selectedIndex].value,
-          "hands": hands.options[hands.selectedIndex].value
-        }
-        
-        return options;
-      };
-      var submitButton = document.getElementById("save_button");
-      submitButton.addEventListener("click", 
-        function() {
-          console.log("Submit");
-          var options = saveOptions();
-           var return_to = getQueryParam('return_to', 'pebblejs://close#');
-           var location = return_to + encodeURIComponent(JSON.stringify(options));
-          
-          
-          document.location = location;
-        }, 
-      false);
-    </script>
+    var options = {
+      "scale": Scale.options[Scale.selectedIndex].value
+    };
+    // Save for next launch
+    localStorage["scale"] = options["scale"];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+    var Scale = document.getElementById("scale");
+    // Load any previously saved configuration, if available
+    if(localStorage["scale"]) {
+	Scale.value = localStorage["scale"];
+    }
+  })();
+  </script>
   </body>
 </html>
